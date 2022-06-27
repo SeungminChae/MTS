@@ -1,0 +1,2 @@
+@UserId = 323NORTH0145
+https://secure.shippingapis.com/ShippingAPI.dll?API=verify&XML=<AddressValidateRequest USERID="{{UserId}}"><Revision>1</Revision><Address ID="0"><Address1>SUITE K</Address1><Address2>29851 Aventura</Address2><City/><State>CA</State><Zip5>92688</Zip5><Zip4/></Address></AddressValidateRequest>

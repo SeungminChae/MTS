@@ -1,0 +1,18 @@
+@model ProductCategory
+
+<h2>Delete Category Confirm</h2>
+
+<p>Are you sure that you want to delete this Category?</p>
+<div class="form-horizontal">
+    <form method="POST">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label>@Model.Name</label>
+        </div>
+
+        <p>
+            This action can be undo in the restore page.<br />
+            <button type="submit" class="btn btn-danger" role="button">Delete</button>
+        </p>
+    </form>
+</div>

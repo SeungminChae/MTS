@@ -1,0 +1,26 @@
+@model IEnumerable<Product>
+
+<div>
+    <p>
+        <a asp-controller="Admin" asp-action="AddProduct" class="btn btn-primary" role="button">Add Product</a>
+        <a asp-controller="Admin" asp-action="RestoreProduct" class="btn btn-Secondary" role="button">Restore Product</a>
+    </p>
+    @foreach (var item in Model)
+    {
+        <div class="card col-lg-4">
+            <img class="card-img-top" src="/lib/images/@item.ImagePath"></img>
+            <div class="card-body">
+                <h3 class="card-title">@item.Name, $@item.Price</h3>
+                <p class="card-text">@item.Description</p>
+                <div class="text-center">
+                    <a class="btn btn-primary" asp-controller="Home" asp-action="Product"
+                        asp-route-productId="@item.Id">View</a>
+                    <a class="btn btn-secondary" asp-controller="Admin" asp-action="editproduct"
+                        asp-route-id="@item.Id">Edit</a>
+                    <a class="btn btn-secondary" asp-controller="Admin" asp-action="deleteProduct"
+                        asp-route-id="@item.Id">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

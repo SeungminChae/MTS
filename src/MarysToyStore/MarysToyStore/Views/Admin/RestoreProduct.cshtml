@@ -1,0 +1,17 @@
+@model IEnumerable<Product>
+<div>
+    <h3>Restore Product</h3>
+    <table class="table">
+        <tr>
+            <th>Product</th>
+            <th>Action</th>
+        </tr>
+        @foreach (Product p in Model)
+        {
+            <tr>
+                <td>@p.Name</td>
+                <td><a asp-controller="Admin" asp-action="RestoreProduct" asp-route-id="@p.Id" class="btn btn-link">Restore</a></td>
+            </tr>
+        }
+    </table>
+</div>

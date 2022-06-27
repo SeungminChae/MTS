@@ -1,0 +1,20 @@
+@model Brand
+
+<h2>Delete Brand Confirm</h2>
+
+<div class="form-horizontal">
+
+@* These elements can be used within the form tag as well just like the anchor tag
+asp-controller="admin" asp-action="DeleteBrandConfirm" asp-route-id="@item.Id" *@
+    <form method="POST">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group">
+            <label>@Model.Name</label>
+        </div>
+
+        <p>
+            This action can be undo in the restore page.<br />
+            <button type="submit" class="btn btn-danger" role="button">Delete</button>
+        </p>
+    </form>
+</div>

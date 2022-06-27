@@ -1,0 +1,22 @@
+@model Product
+@if (Model != null)
+{
+    <div class="productStyles">
+        <h3>@Model.Name</h3>
+        <img class="img-fluid" src="../lib/images/@Model.ImagePath">
+        <p>@Model.Description</p>
+        <p>Price: $@Model.Price</p>
+    @if(Context.User.Identity.IsAuthenticated)
+    {
+        <form method="POST" asp-controller="cart" asp-action="addtocart" asp-route-id="@Model.Id">
+            <p>
+                <button type="submit" class="btn btn-primary" role="button">Add to cart</button>
+            </p>
+        </form>
+    }
+    </div>
+}
+else
+{
+    <p>No products have been found with that provided Id.</p>
+}

@@ -1,0 +1,48 @@
+@model PaginatedList<Product>
+
+<div>
+    <div>
+        <p>Sort by: 
+            <a asp-controller="Home" asp-action="Index" asp-route-sort='@ViewData["NameSortParm"]' asp-route-filter='@Context.Request.Query["filter"]'>Name</a> |
+            <a asp-controller="Home" asp-action="Index" asp-route-sort='@ViewData["PriceSortParm"]' asp-route-filter='@Context.Request.Query["filter"]'>Price</a> |
+            
+        </p>
+    </div>
+
+    @foreach(var item in Model)
+    {
+        <div class="card col-lg-4">
+            <img class="card-img-top" src="/lib/images/@item.ImagePath"></img>
+            <div class="card-body">
+                <h3 class="card-title">@item.Name, $@item.Price</h3>
+                <p class="card-text">@item.Description</p>
+                <div class="text-center">
+                    <a class="btn btn-primary" asp-controller="Home" asp-action="Product" asp-route-productId="@item.Id">View</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-controller="Home" 
+   asp-action="Index"
+   asp-route-sort='@Context.Request.Query["sort"]'
+   asp-route-filter='@Context.Request.Query["filter"]'
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-outline-primary @prevDisabled">
+    Previous
+</a>
+
+<a asp-controller="Home" 
+   asp-action="Index"
+   asp-route-sort='@Context.Request.Query["sort"]'
+   asp-route-filter='@Context.Request.Query["filter"]'
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-outline-primary @nextDisabled">
+    Next
+</a>

@@ -1,0 +1,57 @@
+@model Order
+
+<h2>Order Review</h2>
+
+@if (Model != null && Model.OrderLines.Count > 0)
+{
+    <table class="table">
+        <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+        </tr>
+
+        @foreach(var item in Model.OrderLines)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Home" asp-action="Product" asp-route-id="@item.ProductId">@item.Product.Name</a>
+                </td>
+                <td>@item.Price</td>
+                <td>@item.ProductQuantity</td>
+            </tr>
+        }
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <strong>Tax: $@Model.Tax</strong>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <strong>Price: $@Model.Price</strong>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <strong>Total: $@Model.Cost</strong>
+            </td>
+        </tr>
+    </table>
+
+    <form asp-controller="Cart" asp-action="PlaceOrder">
+        <p>
+            <button type="submit" class="btn btn-primary" role="button">Place Order</button>
+        </p>
+    </form>
+}
+else
+{
+    <p>It looks like your cart is empty. You should really add something...</p>
+}

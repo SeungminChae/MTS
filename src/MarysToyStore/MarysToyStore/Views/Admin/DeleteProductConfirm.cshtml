@@ -1,0 +1,54 @@
+@model ProductViewModel
+
+@{// output displays a list of product categories that the product has.
+    string output = "";
+
+    // If there is not category, display "None";
+    if(Model.SelectedProductCategoryIds.Count == 0)
+    {
+        output = "None";
+    }
+
+    // Otherwise add the names of the categories to a string variable(string)
+    else
+    {
+        // The number is used to count progress to exclude comma for the last category term in the list.
+        int number = 1;
+        foreach(int i in Model.SelectedProductCategoryIds)
+        {
+            foreach(ProductCategory pc in Model.AllProductCategories)
+            {
+                if(i == pc.Id && number != Model.SelectedProductCategoryIds.Count)
+                {
+                    output += pc.Name + ", ";
+                    number++;
+                }
+                else if(i == pc.Id)
+                {
+                    output += pc.Name;
+                }
+            }
+        }
+    }
+}
+
+<h2>Delete Product Confirm</h2>
+
+<p>Are you sure you want to delete this product?</p>
+<div class="form-horizontal">
+    <form method="post">
+        <input type="hidden" asp-for="Product.Id" />
+        <div class="form-group">
+            <label>Name : @Model.Product.Name</label><br />
+            <label>Brand : @Model.Product.Brand</label><br />
+            <label>Description : @Model.Product.Description</label><br />
+            <label>Price : @Model.Product.Price</label><br />
+            <label>Category : @output</label>
+        </div>
+
+        <p>
+            This action can be undo in the restore page.<br />
+            <button type="submit" class="btn btn-danger" role="button">Delete</button>
+        </p>
+    </form>
+</div>

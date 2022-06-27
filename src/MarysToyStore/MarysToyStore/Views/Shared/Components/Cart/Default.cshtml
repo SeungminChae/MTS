@@ -1,0 +1,14 @@
+@model List<CartItem>
+
+@{
+    // Determine cart quantity.
+    int cartItemCount = 0;
+    foreach(CartItem cartItem in Model)
+    {
+        cartItemCount += cartItem.Quantity;
+    }
+
+    <li>
+        <a asp-controller="Cart" asp-action="ViewCart" class="nav-link" role="button">Cart (@Html.Raw(cartItemCount))</a>
+    </li>
+}
